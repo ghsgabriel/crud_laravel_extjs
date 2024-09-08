@@ -1,0 +1,313 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "User Management API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8888",
+      "description": "Local development server"
+    }
+  ],
+  "paths": {
+    "/api/users": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "List all users",
+        "responses": {
+          "200": {
+            "description": "User list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/User"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Users"],
+        "summary": "Create a new user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error"
+          }
+        }
+      }
+    },
+    "/api/users/{id}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get a specific user",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found or inactive"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Users"],
+        "summary": "Update a user",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found or inactive"
+          },
+          "422": {
+            "description": "Validation error"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Users"],
+        "summary": "Partially update a user",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found or inactive"
+          },
+          "422": {
+            "description": "Validation error"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Users"],
+        "summary": "Remove a user",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "User removed"
+          },
+          "404": {
+            "description": "User not found or inactive"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "João Silva"
+          },
+          "cpf": {
+            "type": "string",
+            "example": "12345678901"
+          },
+          "birth_date": {
+            "type": "string",
+            "format": "date",
+            "example": "1990-01-15"
+          },
+          "email": {
+            "type": "string",
+            "example": "joao.silva@example.com"
+          },
+          "phone": {
+            "type": "string",
+            "example": "11988887777"
+          },
+          "zip_code": {
+            "type": "string",
+            "example": "80340200"
+          },
+          "state": {
+            "type": "string",
+            "example": "SP"
+          },
+          "city": {
+            "type": "string",
+            "example": "São Paulo"
+          },
+          "district": {
+            "type": "string",
+            "example": "Centro"
+          },
+          "address": {
+            "type": "string",
+            "example": "Rua das Flores, 123"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["active", "inactive"],
+            "example": "active"
+          }
+        }
+      },
+      "UserInput": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Maria Santos"
+          },
+          "cpf": {
+            "type": "string",
+            "example": "01234567890"
+          },
+          "birth_date": {
+            "type": "string",
+            "format": "date",
+            "example": "1985-07-20"
+          },
+          "email": {
+            "type": "string",
+            "example": "maria.santos@example.com"
+          },
+          "phone": {
+            "type": "string",
+            "example": "11988887777"
+          },
+          "zip_code": {
+            "type": "string",
+            "example": "80620300"
+          },
+          "state": {
+            "type": "string",
+            "example": "RJ"
+          },
+          "city": {
+            "type": "string",
+            "example": "Rio de Janeiro"
+          },
+          "district": {
+            "type": "string",
+            "example": "Copacabana"
+          },
+          "address": {
+            "type": "string",
+            "example": "Avenida Atlântica, 456"
+          }
+        },
+        "required": ["name", "cpf", "birth_date", "email", "phone", "zip_code", "state", "city", "district", "address"]
+      }
+    }
+  }
+}
