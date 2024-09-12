@@ -1,0 +1,6 @@
+{
+  "leaf": false,
+  "children": [
+    { "text": "Usuários", "iconCls": "x-fa fa-table", "xtype": "userview","leaf": true }
+  ]
+}

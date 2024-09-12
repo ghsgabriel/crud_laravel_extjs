@@ -1,0 +1,23 @@
+#ext-viewport::after {
+    content: '';
+}
+.white-search-field {
+    .x-input-el {
+        color: white !important;
+        &::placeholder {
+            color: rgba(255, 255, 255, 0.6) !important;
+        }
+    }
+    .x-input-wrap-el {
+        &:before {
+            color: white !important;
+        }
+    }
+    
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 4px;
+    
+    .x-icon-el {
+        color: #ccc !important;
+    }
+}
