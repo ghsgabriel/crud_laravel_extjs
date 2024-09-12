@@ -23,25 +23,30 @@ Aplicação full-stack de CRUD de Usuários utilizando Laravel 11 para a API bac
    docker compose up -d
    ```
 
-3. Instale dependências:
+3. Copie o arquivo de ambiente:
+   ```
+   docker exec -it backend cp .env.example .env
+   ```
+
+4. Instale dependências:
    ```
    docker exec -it backend composer install
    ```
 
-4. Execute migrations e seeders:
+5. Execute migrations e seeders:
    ```
    docker exec -it backend php artisan migrate --seed
    ```
-
-5. Acesse:
-    - Frontend: http://localhost:1962
-    - API: http://localhost:8888/api/users
-    - Swagger: http://localhost:8890
 
 6. Execute os testes:
    ```
    docker exec -it backend php artisan test
    ```
+
+7. Acesse:
+   - Frontend: http://localhost:1962
+   - API: http://localhost:8888/api/users
+   - Swagger: http://localhost:8890
 
 
 ## Agradecimentos
