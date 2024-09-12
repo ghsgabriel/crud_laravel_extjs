@@ -1,0 +1,26 @@
+FROM node:18
+
+RUN apt-get update && \
+    apt-get install -y openjdk-17-jdk && \
+    apt-get clean;
+
+
+WORKDIR /usr/src/app
+
+
+COPY ./frontend/package*.json ./
+
+
+RUN npm install
+
+
+RUN chmod -R 777 node_modules
+
+
+COPY ./frontend/ .
+
+
+EXPOSE 1962
+
+
+CMD ["npm", "start"]
