@@ -18,7 +18,7 @@ class UserService
      */
     public function getAllUsers(): Collection
     {
-        return User::active()->get();
+        return User::active()->orderBy('id', 'desc')->get();
     }
 
     /**

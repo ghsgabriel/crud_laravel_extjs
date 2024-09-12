@@ -29,10 +29,5 @@ return Application::configure(basePath: dirname(__DIR__))
                 'message' => "Not found"
             ], 404);
         });
-        $exceptions->renderable(function (Exception $e, $request) {
-            return response()->json([
-                'message' => "Internal Error"
-            ], 500);
-        });
     })
     ->create();
